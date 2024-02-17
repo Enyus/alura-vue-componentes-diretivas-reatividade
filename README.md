@@ -11,10 +11,10 @@ Repositório para guardas as anotações e prática do curso da Alura Vue 3: Ent
 ![](./images/homepage.png#vitrinedev)
 
 ## Conteúdos
-* [Detalhes do Projeto](#🗈-detalhes-do-projeto)
+* [Detalhes do Projeto](#-detalhes-do-projeto)
     * [Iniciando um Projeto Vue](#iniciando-um-projeto-vue)
     * [Extensões úteis do VSCode](#extensões-úteis-do-vscode)
-* [Para Rodar o Projeto](#📀-para-rodar-o-projeto)
+* [Para Rodar o Projeto](#-para-rodar-o-projeto)
 * [Links](#links)
 
 
