@@ -10,6 +10,13 @@ Repositório para guardas as anotações e prática do curso da Alura Vue 3: Ent
 <!-- Inserir imagem com a #vitrinedev ao final do link -->
 ![](./images/homepage.png#vitrinedev)
 
+## Conteúdos
+* [Detalhes do Projeto](#🗈-detalhes-do-projeto)
+    * [Iniciando um Projeto Vue](#iniciando-um-projeto-vue)
+    * [Extensões úteis do VSCode](#extensões-úteis-do-vscode)
+* [Para Rodar o Projeto](#📀-para-rodar-o-projeto)
+* [Links](#links)
+
 
 ## 🗈 Detalhes do projeto
 Este projeto é o meu primeiro contato com o Framework Vue.
@@ -23,7 +30,7 @@ Este projeto é o meu primeiro contato com o Framework Vue.
 4. Ao confirmar, as perguntas básicas de criação de projeto serão apresentadas:
 ![Perguntas para criação do projeto](./images/perguntas-vue.png)
 5. O projeto será criado na pasta com o nome informado ("Project name", no meu caso, "cookin-up") e serão apresentadas os próximos comandos para abrir o projeto e instalar as dependências iniciais:
-![Comandos abrir projeto vue criado](./images/instrucos-abrir-projeto-vue.png)
+![Comandos abrir projeto vue criado](./images/instrucoes-abrir-projeto-vue.png)
 ```cmd
 <!-- No prompt de comando -->
 cd cookin-up
@@ -47,6 +54,9 @@ O instrutor recomenda a instalação das seguintes extensões do VSCode para fac
 
 ## 📀 Para rodar o projeto
 - Clonar o repositório;
+- Entrar na pasta __cookin-up__ com ```cd cookin-up```;
+- Instalar as dependências necessárias ```npm install```;
+- Rode o projeto com o comando ```npm run dev``` e o app estará rodando no servidor local na porta __5173__ (http://localhost:5173/).
 
 <a href="#" style="display:flex; justify-content: end"> ⬆️Topo⬆️</a>
 
