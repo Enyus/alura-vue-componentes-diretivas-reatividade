@@ -15,13 +15,13 @@ Repositório para guardas as anotações e prática do curso da Alura Vue 3: Ent
     * [Iniciando um Projeto Vue](#iniciando-um-projeto-vue)
     * [Extensões úteis do VSCode](#extensões-úteis-do-vscode)
     * [Preparação Inicial](#preparação-inicial)
-    * [O básico do Vue](#o-basico-do-vue)
+    * [O básico do Vue](#o-básico-do-vue)
     * [A estrutura de um componente Vue](#a-estrutura-de-um-componente-vue)
     * [Importando componentes dentro de outro componente](#importando-componentes-dentro-de-outro-componente)
 * [Para Rodar o Projeto](#-para-rodar-o-projeto)
 * [Links](#links)
 
-<p align="right"><a href="#">⬆️Topo⬆️</a></p>
+<a href="#" style="display: block; text-align: right">⬆️Topo⬆️</a>
 
 
 ## 🗈 Detalhes do projeto
@@ -47,7 +47,7 @@ npm run dev
 6. Ao inserir os comandos, um servidor local será criado, na porta __5173__ o app básico será iniciado:
 ![Página home básica do Vue](./images/home-vue.png)
 
-<p align="right"><a href="#">⬆️Topo⬆️</a></p>
+<a href="#" style="display: block; text-align: right">⬆️Topo⬆️</a>
 
 
 ### Extensões Úteis do VSCode
@@ -55,7 +55,7 @@ O instrutor recomenda a instalação das seguintes extensões do VSCode para fac
 - Vue Language Features (Volar)
 - TypeScript Vue Plugin (Volar)
 
-<p align="right"><a href="#">⬆️Topo⬆️</a></p>
+<a href="#" style="display: block; text-align: right">⬆️Topo⬆️</a>
 
 ### Preparação Inicial
 Conforme indicado pelo instrutor, alguns arquivos podem ser deletados e/ou alterados, para a criação do app **cookin´up**, então foram tomados os seguintes passos inicias na pasta gerada pelo Vue:
@@ -70,7 +70,7 @@ Conforme indicado pelo instrutor, alguns arquivos podem ser deletados e/ou alter
     4. Clique no pequeno ícone de engrenagem da "TypeScript and JavaScript Language Features" e selecione "Disable (Workspace)".
     5. Recarregue o VSCode.
 
-<p align="right"><a href="#">⬆️Topo⬆️</a></p>
+<a href="#" style="display: block; text-align: right">⬆️Topo⬆️</a>
 
 
 ### O básico do Vue
@@ -113,15 +113,15 @@ createApp(App).mount('#app')
 </template>
 ```
 
-<p align="right"><a href="#">⬆️Topo⬆️</a></p>
+<a href="#" style="display: block; text-align: right">⬆️Topo⬆️</a>
 
 
 ### A estrutura de um componente Vue
 Um componente Vue tem a seguinte aparência:
 ```vue
 <script lang="ts">
-    <!-- Código JavaScript ou Typescript, linguagem definida pelo atributo "lang" -->
-    <!-- Aqui aparece a parte lógica do componente, assim como a importação de possíveis outros componentes filhos -->
+    // Código JavaScript ou Typescript, linguagem definida pelo atributo "lang"
+    // Aqui aparece a parte lógica do componente, assim como a importação de possíveis outros componentes filhos
 </script>
 
 <template>
@@ -129,11 +129,11 @@ Um componente Vue tem a seguinte aparência:
 </template>
 
 <style scoped>
-    <!-- Estilização do componente -->
-    <!-- O atributo "scoped" indica que a estilização afetará apenas este componente, se ele não for declarado, a estilização afetará todos os componentes como uma tag <style> normal -->
+    /* Estilização do componente */
+    /* O atributo "scoped" indica que a estilização afetará apenas este componente, se ele não for declarado, a estilização afetará todos os componentes como uma tag <style> normal */
 </style>
 ``` 
-<p align="right"><a href="#">⬆️Topo⬆️</a></p>
+<a href="#" style="display: block; text-align: right">⬆️Topo⬆️</a>
 
 
 ### Importando Componentes dentro de outro Componente
@@ -155,7 +155,7 @@ export default {
 </template>
 ``` 
 
-<p align="right"><a href="#">⬆️Topo⬆️</a></p>
+<a href="#" style="display: block; text-align: right">⬆️Topo⬆️</a>
 
 
 ## 📀 Para rodar o projeto
@@ -164,7 +164,7 @@ export default {
 - Instalar as dependências necessárias ```npm install```;
 - Rode o projeto com o comando ```npm run dev``` e o app estará rodando no servidor local na porta __5173__ (http://localhost:5173/).
 
-<p align="right"><a href="#">⬆️Topo⬆️</a></p>
+<a href="#" style="display: block; text-align: right">⬆️Topo⬆️</a>
 
 
 ## Links
@@ -172,4 +172,4 @@ export default {
 - [Documentação do Vue](https://br.vuejs.org/v2/guide/index.html);
 - [Projeto final do instrutor](https://github.com/alura-cursos/cookin-up/tree/main).
 
-<p align="right"><a href="#">⬆️Topo⬆️</a></p>
+<a href="#" style="display: block; text-align: right">⬆️Topo⬆️</a>
