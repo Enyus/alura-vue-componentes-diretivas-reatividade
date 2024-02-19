@@ -11,6 +11,8 @@ Repositório para guardas as anotações e prática do curso da Alura Vue 3: Ent
 ![](./images/homepage.png#vitrinedev)
 
 ## Conteúdos
+* [Para Rodar o Projeto](#-para-rodar-o-projeto)
+* [Links](#links)
 * [Detalhes do Projeto](#-detalhes-do-projeto)
     * [Iniciando um Projeto Vue](#iniciando-um-projeto-vue)
     * [Extensões úteis do VSCode](#extensões-úteis-do-vscode)
@@ -18,8 +20,24 @@ Repositório para guardas as anotações e prática do curso da Alura Vue 3: Ent
     * [O básico do Vue](#o-básico-do-vue)
     * [A estrutura de um componente Vue](#a-estrutura-de-um-componente-vue)
     * [Importando componentes dentro de outro componente](#importando-componentes-dentro-de-outro-componente)
-* [Para Rodar o Projeto](#-para-rodar-o-projeto)
-* [Links](#links)
+    * [Diretivas Vue](#diretivas-vue)
+
+<p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
+
+
+## 📀 Para rodar o projeto
+- Clonar o repositório;
+- Entrar na pasta __cookin-up__ com ```cd cookin-up```;
+- Instalar as dependências necessárias ```npm install```;
+- Rode o projeto com o comando ```npm run dev``` e o app estará rodando no servidor local na porta __5173__ (http://localhost:5173/).
+
+<p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
+
+
+## Links
+- A parte prática do curso envolve o desenvolvimento de um aplicativo chamado CookinUp. [Este é o arquivo Figma do Projeto](https://www.figma.com/file/J4J2EY9BDJKYueH7QGrsnz/Cookin'UP-%7C-Vue-1-(Copy)?type=design&node-id=1901-2&mode=design&t=odeZYaNpiVTuXDSt-0);
+- [Documentação do Vue](https://br.vuejs.org/v2/guide/index.html);
+- [Projeto final do instrutor](https://github.com/alura-cursos/cookin-up/tree/main).
 
 <p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
 
@@ -158,18 +176,145 @@ export default {
 <p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
 
 
-## 📀 Para rodar o projeto
-- Clonar o repositório;
-- Entrar na pasta __cookin-up__ com ```cd cookin-up```;
-- Instalar as dependências necessárias ```npm install```;
-- Rode o projeto com o comando ```npm run dev``` e o app estará rodando no servidor local na porta __5173__ (http://localhost:5173/).
+### Diretivas Vue
+O Vue apresenta algumas "funções" específicas que podem ser usadas para o controle da renderização de um componente ou parte dele. Essas diretivas geralmente são usadas como um atributo dentro de uma tag html e são nomeadas com "v-".
 
-<p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
+#### v-for
+Quando é necessária a repetição de um elemento (geralmente um ```<li>```), é possível usar a diretiva for
 
+```vue
+<script lang="ts">
+  export default {
+    data() {
+      return {
+        ingredientes: ["Alho", "Manteiga", "Orégano"]
+      }
+    };
+    // Para disponibilizar para o componente uma variável, é necessário exportar uma função data que retorna um objeto com as variáveis ali declaradas.
+  }
+</script>
 
-## Links
-- A parte prática do curso envolve o desenvolvimento de um aplicativo chamado CookinUp. [Este é o arquivo Figma do Projeto](https://www.figma.com/file/J4J2EY9BDJKYueH7QGrsnz/Cookin'UP-%7C-Vue-1-(Copy)?type=design&node-id=1901-2&mode=design&t=odeZYaNpiVTuXDSt-0);
-- [Documentação do Vue](https://br.vuejs.org/v2/guide/index.html);
-- [Projeto final do instrutor](https://github.com/alura-cursos/cookin-up/tree/main).
+<template>
+  <ul>
+    <li v-for="ingrediente in ingredientes">
+      <!-- Para cada item ("ingrediente") da lista ("ingredientes") será criado uma tag <li> -->
+      {{ ingrediente }}
+      <!-- Para interpolar dados no corpo de uma tag html do componente, é necessário usar os indicadores {{ }}, porém para passar uma variável dentro de um atributo da tag, é necessário usar outro tipo de sintaxe (veja v-bind abaixo) -->
+    </li>
+  </ul>
+</template>
+```
+
+#### v-bind
+Uma boa prática no caso de listas para criação de html dinâmico, é usar o atributo ```key``` nas tags que se repetirão, para garantir que as tags geradas por um laço de repetição (por exemplo) possam ser devidamente distinguidas umas das outras. Como o atributo ```key``` deve ser uma espécie de identificador, é recomendado que o próprio elemento (ou parte dele) do laço de repetição seja usado como valor. No entanto, a interpolação com ```{{ }}``` não é possível dentro de atributos, assim é necessária a diretiva v-bind, que permitirá o uso de variáveis dentro de atributos html.
+
+```vue
+<script lang="ts">
+  export default {
+    data() {
+      return {
+        ingredientes: ["Alho", "Manteiga", "Orégano"]
+      }
+    };
+  }
+</script>
+
+<template>
+  <ul>
+    <li v-for="ingrediente in ingredientes" v-bind:key="ingrediente">
+    <!-- A diretiva v-bind também pode ser abreviada apenas como ':', ficando ':key="ingrediente"' -->
+      {{ ingrediente }}
+    </li>
+  </ul>
+</template>
+```
+
+#### v-if e v-else
+Quando é desejada a renderização condicional de certos componentes ou tags, são usadas as diretivas ```v-if``` e ```v-else```. No exemplo em tela, caso a lista de ingredientes ```<ul>``` só deva ser renderizada quando ```ingredientes``` não for vazia e, nos casos quando ela for vazia, um outro texto seja apresentado, o código fica assim:
+
+```vue
+<script lang="ts">
+  export default {
+    data() {
+      return {
+        ingredientes: ["Alho", "Manteiga", "Orégano"]
+      }
+    };
+  }
+</script>
+
+<template>
+  <ul v-if="ingredientes.length">
+    <!-- A tag <ul> só será renderizada caso a lista "ingredientes" não esteja vazia -->
+    <!-- Importante lembrar que quando a lista "ingredientes" for vazia, "ingredientes.length" será zero e "0" é considerado "false" em booleano -->
+    <li v-for="ingrediente in ingredientes" v-bind:key="ingrediente">
+      {{ ingrediente }}
+    </li>
+  </ul>
+
+  <p v-else>
+    <!-- É importante lembrar que a diretiva "v-else" só funcionará se colocada em um elemento logo após um irmão que tenha a diretiva "v-if" -->
+    Sua lista está vazia, selecione ingredientes para iniciar.
+  </p>
+</template>
+```
+
+#### Importando dados
+Como declarar uma lista dentro do próprio componente prejudica a escalabilidade, não é uma boa prática. Assim, o instrutor nos guia para a criação de um código para conseguir os dados dinamicamente (no momento é apenas uma função que retorna uma lista, mas futuramente será a chamada de uma API). Na pasta ```src```, criamos a pasta ```http``` e dentro dela o arquivo ```ìndex.ts```:
+
+```ts
+export function obterCategorias() {
+    return [
+      {
+        "nome": "Laticínios e Ovos",
+        "ingredientes": ["Ovos", "Queijo", "Leite", "Manteiga", "Creme de Leite", "Iogurte", "Leite Condensado", "Sorvete"],
+        "rotulo": "laticinios_e_ovos"
+      },
+      {
+        "nome": "Farinhas e Fermentos",
+        "ingredientes": ["Farinha de trigo", "Polvilho", "Farinha de rosca", "Canjica", "Farinha de mandioca", "Fubá", "Linhaça", "Fermento químico"],
+        "rotulo": "farinhas_e_fermentos"
+      }
+    ]
+}
+// note que a função retorna um JSON, que é o retorno mais comum de uma API
+```
+
+Assim, podemos executar essa função dentro de um componente ao invés de colocar uma lista estática:
+
+```vue
+<script lang="ts">
+  import { obterCategorias } from '@/http/index';
+  // A função deve ser importada. No vue, é possível usar "@" para referenciar a pasta raiz "src", mas é necessária uma configuração especial (veja abaixo)
+
+  export default {
+    data() {
+      return {
+        categorias: obterCategorias()
+        // Ao invés de declarar uma lista estática, chamamos a função que retornará a lista desejada.
+      }
+    }
+  }
+</script>
+
+<template>
+  <!-- Agora poderemos iterar a lista com o "v-for" como acima -->
+</template>
+```
+
+##### Configurando o eslint para aceitar o "@" como "src"
+Como mencionado, o Vue permite usar o símbolo ```@``` ao invés da pasta ```src```, mas para isso é necessário configurar o Typescript corretamente. No arquivo ```tsconfig.app.json```, devemos alterar a configuração da seguinte forma:
+
+```json
+{
+  // Outras Configurações
+  // Mudar o item "include" de:
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  // para:
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/**/*.ts"],
+  // Outras configurações
+}
+```
+Será necessário reiniciar o VSCode, o que pode ser feito com o comando ```ctrl+shift+p``` e digitar ```reload``` e selecionar ```Developer: Reload Window```.
 
 <p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
