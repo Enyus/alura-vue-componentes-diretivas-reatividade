@@ -21,6 +21,8 @@ Repositório para guardas as anotações e prática do curso da Alura Vue 3: Ent
     * [A estrutura de um componente Vue](#a-estrutura-de-um-componente-vue)
     * [Importando componentes dentro de outro componente](#importando-componentes-dentro-de-outro-componente)
     * [Diretivas Vue](#diretivas-vue)
+    * [Importando Dados](#importando-dados)
+    * [Consumindo dados de uma API](#consumindo-dados-de-uma-api)
 
 <p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
 
@@ -38,6 +40,7 @@ Repositório para guardas as anotações e prática do curso da Alura Vue 3: Ent
 - A parte prática do curso envolve o desenvolvimento de um aplicativo chamado CookinUp. [Este é o arquivo Figma do Projeto](https://www.figma.com/file/J4J2EY9BDJKYueH7QGrsnz/Cookin'UP-%7C-Vue-1-(Copy)?type=design&node-id=1901-2&mode=design&t=odeZYaNpiVTuXDSt-0);
 - [Documentação do Vue](https://br.vuejs.org/v2/guide/index.html);
 - [Projeto final do instrutor](https://github.com/alura-cursos/cookin-up/tree/main).
+- [Artigo da Alura sobre o ciclo de vida dos componentes em Vue](https://www.alura.com.br/artigos/vuejs-ciclo-vida-componentes)
 
 <p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
 
@@ -259,7 +262,10 @@ Quando é desejada a renderização condicional de certos componentes ou tags, s
 </template>
 ```
 
-#### Importando dados
+<p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
+
+
+### Importando dados
 Como declarar uma lista dentro do próprio componente prejudica a escalabilidade, não é uma boa prática. Assim, o instrutor nos guia para a criação de um código para conseguir os dados dinamicamente (no momento é apenas uma função que retorna uma lista, mas futuramente será a chamada de uma API). Na pasta ```src```, criamos a pasta ```http``` e dentro dela o arquivo ```ìndex.ts```:
 
 ```ts
@@ -302,7 +308,7 @@ Assim, podemos executar essa função dentro de um componente ao invés de coloc
 </template>
 ```
 
-##### Configurando o eslint para aceitar o "@" como "src"
+#### Configurando o eslint para aceitar o "@" como "src"
 Como mencionado, o Vue permite usar o símbolo ```@``` ao invés da pasta ```src```, mas para isso é necessário configurar o Typescript corretamente. No arquivo ```tsconfig.app.json```, devemos alterar a configuração da seguinte forma:
 
 ```json
@@ -316,5 +322,53 @@ Como mencionado, o Vue permite usar o símbolo ```@``` ao invés da pasta ```src
 }
 ```
 Será necessário reiniciar o VSCode, o que pode ser feito com o comando ```ctrl+shift+p``` e digitar ```reload``` e selecionar ```Developer: Reload Window```.
+
+<p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
+
+
+### Consumindo Dados de uma API
+No tópico anterior, foi visto como se adicionam dados externos a um componente Vue, mas a maneira mais costumeira de fazer isso é através do consumo de uma API, assim, vamos alterar a função ```obterCategorias()```:
+
+```ts
+import type ICategoria from '@/interfaces/ICategoria';
+// Como trabalhamos com o typescript, é uma boa prática criar uma interface para os objetos categorias para indicar ao aplicativo qual é a formação do objeto esperado
+// No arquivo src/interfaces/ICategoria.ts em questão, uma interface para a categoria é criada:
+// export default interface ICategoria {
+//   nome: string
+//   ingredientes: string[]
+//   imagem: string
+// }
+
+export async function obterCategorias() {
+  const resposta = await fetch('https://gist.githubusercontent.com/antonio-evaldo/002ad55e1cf01ef3fc6ee4feb9152964/raw/07e853b7d0626db51ce2e84bb2f15ca450b7bd7f/categorias.json');
+
+  const categorias: ICategoria[] = await resposta.json();
+
+  return categorias;
+}
+```
+
+E podemos usar isso no componente ```SelecionarIntegredientes.vue```. No entanto, para estes casos em que os dados são obtidos de maneira assíncrona, não é o método ```data``` o melhor a ser utilizado, mas sim uma combinação dele com o método ```created()```, uma função do ciclo de vida do Vue:
+
+```vue
+<script lang="ts">
+import { obterCategorias } from '@/http/index';
+import type ICategoria from '@/interfaces/ICategoria';
+
+export default {
+  data() {
+    return {
+      categorias: [] as ICategoria[]
+      // declara-se que existirá um ESTADO chamado categorias, o que implicará na re-renderização do componente quando ele é alterado.
+    }
+  },
+  async created() {
+    // O método created() pode ser assíncrono, permitindo a consulta a APIs.
+    // O método created() roda após o renderer encontrar o componente em questão, mas antes de criar os nós de html no DOM
+    this.categorias = await obterCategorias();
+  }
+}
+</script>
+```
 
 <p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
