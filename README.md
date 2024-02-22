@@ -23,6 +23,7 @@ Repositório para guardas as anotações e prática do curso da Alura Vue 3: Ent
     * [Diretivas Vue](#diretivas-vue)
     * [Importando Dados](#importando-dados)
     * [Consumindo dados de uma API](#consumindo-dados-de-uma-api)
+    * [Props](#props)
 
 <p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
 
@@ -372,3 +373,57 @@ export default {
 ```
 
 <p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
+
+
+### Props
+Para a comunicação entre componentes, os dados podem ser enviados através de ***props*** (properties). Para informar que um componente está esperando uma prop, isto deve ser declarado no script do componente `CardCategoria.vue`:
+
+```vue
+<script lang="ts">
+export default {
+  props: {
+    // categoria: Object
+    // Caso se deseje apenas definir o tipo da prop categoria, ela pode ser declarada como acima.
+    // categoria: { type: Object, required: true}
+    // O vue permite algumas opções ao se passar uma prop, nesse caso, pode-se abrir um objeto, onde as opções podem ser descritas; no caso, a opção "required: true" indica que a prop categoria sempre deve ser informada quando o componente for chamado
+    categoria: { type: Object as PropType<ICategoria>, required: true}
+    // Caso seja interessante usar um tipo específico, a estrutura acima pode ser utilizada. Isso é útil para o autocomplete e correção de erros.
+  }
+}
+</script>
+
+<template>
+    {{ categoria.nome }}
+    {{ categoria.imagemm }}
+    <!-- A prop pode ser chamada diretamente como uma variável -->
+</template>
+```
+
+<p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
+
+#### Estilos dinâmicos com props
+Muitas vezes é necessário que um componente seja estilizado de acordo com um estado. Para isso, podemos usar uma `prop` com o estado desejado e usar o `v-bind` com o atributo `class` e uma sintaxe permitida pelo Vue que coloca os estilos desejados como um array. Vejamos o componente `Tag.vue`:
+
+```vue
+<script lang="ts">
+export default {
+    props: {
+        texto: { type: String, required: true },
+        ativa: Boolean
+        // É interessante mencionar que existe uma opção de props chamada "default" que permite que um valor padrão seja usado quando a prop não é declarada; por padrão "defalt: false" esta opção assume o valor "falso", assim essa opção não precisou ser declarada aqui.
+    }
+}
+</script>
+
+<template>
+    <!-- <span class="tag" :class="{ ativa }"> -->
+    <!-- A classe pode ser declarada dinamicamente usando um class sem v-bind e um com -->
+    <span :class="['tag', { ativa }]">
+    <!-- No caso assim, optou-se por usar a sintaxe vue de declarar classes como array -->
+        {{ texto }}
+    </span>
+</template>
+```
+
+<p align="right"><a href="#curso---vue-3---componentes-diretivas-e-reatividade-no-framework">⬆️Topo⬆️</a></p>
+
